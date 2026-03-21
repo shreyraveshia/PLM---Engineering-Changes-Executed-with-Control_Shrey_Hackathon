@@ -4,10 +4,15 @@ const VALID_ROLES = ['admin', 'engineering_user', 'approver', 'operations_user']
 // (...) =>The three dots ... is called the rest operator. It means:
 //"collect all arguments I receive into one array"
 const allowRoles = (...allowedRoles) => {
+
   const invalidRoles = allowedRoles.filter(r => !VALID_ROLES.includes(r));
   if (invalidRoles.length > 0) {
     throw new Error(`Invalid roles specified in allowRoles: ${invalidRoles.join(', ')}`);
   }
+
+  // filter goes through each role you passed and keeps only the ones NOT in 
+  // VALID_ROLES. If any invalid roles are found, throw an error immediately
+
 
   return (req, res, next) => {
     if (!req.user) {

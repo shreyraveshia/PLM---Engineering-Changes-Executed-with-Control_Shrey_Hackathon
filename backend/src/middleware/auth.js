@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+//JWT verification middleware. Every protected route imports `verifyToken` from this file. 
+//It reads the Authorization header, verifies the JWT, and attaches `req.user = 
+// {id, email, role, name}` for downstream use.
+
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
 
