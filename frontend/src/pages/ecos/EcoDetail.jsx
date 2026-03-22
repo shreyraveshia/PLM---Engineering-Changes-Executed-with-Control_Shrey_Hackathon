@@ -5,7 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import StagePipeline from '../../components/ui/StagePipeline';
 import DiffTable from '../../components/ui/DiffTable';
-import { ArrowLeft, Save, CheckCircle2, PlayCircle, Eye, Plus, Trash2 } from 'lucide-react';
+import EcoAuditTimeline from '../../components/ui/EcoAuditTimeline';
+import { ArrowLeft, Save, CheckCircle2, PlayCircle, Eye, Plus, Trash2, Shield } from 'lucide-react';
 
 const emptyDraftComp = () => ({ component_name: '', old_quantity: null, new_quantity: '', unit: 'pcs', change_type: 'added' });
 const emptyDraftOp = () => ({ name: '', old_time_minutes: null, new_time_minutes: '', work_center: '', change_type: 'added' });
@@ -473,6 +474,16 @@ export default function EcoDetail() {
               <p className="text-xs text-gray-600 leading-relaxed">{eco.description}</p>
             </div>
           )}
+
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+              <Shield size={14} className="text-gray-400"/>
+              <h3 className="text-sm font-semibold text-gray-700">Activity History</h3>
+            </div>
+            <div className="p-4">
+              <EcoAuditTimeline ecoId={eco?.id}/>
+            </div>
+          </div>
         </div>
       </div>
     </div>
