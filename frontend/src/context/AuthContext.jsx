@@ -9,7 +9,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
-      const saved = localStorage.getItem('plm_user');
+      const saved = sessionStorage.getItem('plm_user');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -21,8 +21,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/login', { email, password });
       const { token, user: userData } = response.data;
-      localStorage.setItem('plm_token', token);
-      localStorage.setItem('plm_user', JSON.stringify(userData));
+      sessionStorage.setItem('plm_token', token);
+      sessionStorage.setItem('plm_user', JSON.stringify(userData));
       setUser(userData);
       return userData;
     } finally {
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/signup', { name, email, password, role });
       const { token, user: userData } = response.data;
-      localStorage.setItem('plm_token', token);
-      localStorage.setItem('plm_user', JSON.stringify(userData));
+      sessionStorage.setItem('plm_token', token);
+      sessionStorage.setItem('plm_user', JSON.stringify(userData));
       setUser(userData);
       return userData;
     } finally {
@@ -43,8 +43,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
   const logout = useCallback(() => {
-    localStorage.removeItem('plm_token');
-    localStorage.removeItem('plm_user');
+    sessionStorage.removeItem('plm_token');
+    sessionStorage.removeItem('plm_user');
     setUser(null);
   }, []);
   const hasRole = useCallback((...roles) => {

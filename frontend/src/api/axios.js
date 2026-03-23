@@ -12,7 +12,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('plm_token');
+    const token = sessionStorage.getItem('plm_token');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -27,8 +27,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('plm_token');
-      localStorage.removeItem('plm_user');
+      sessionStorage.removeItem('plm_token');
+      sessionStorage.removeItem('plm_user');
       window.location.href = '/login';
     }
     return Promise.reject(error);
