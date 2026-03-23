@@ -1,6 +1,6 @@
-node_modules
+node_modules/
 .env
-dist
+dist/
 .DS_Store
 *.log
 npm-debug.log*
@@ -10,3 +10,4 @@ yarn-error.log*
 .idea
 uploads/*
 !uploads/.gitkeep
+.env.production
