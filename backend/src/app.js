@@ -13,6 +13,7 @@ app.use(helmet({
 
 app.use(cors({
   origin: 'http://localhost:5173',
+  'https://plm-engineering-changes-executed-wi.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
